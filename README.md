@@ -1,14 +1,14 @@
-# Teaching-HEIGVD-RES-2017-Labo-SMTP
+# Teaching-HEIGVD-RES-2017-Labo-MailRobot
 
 ## Objectives
 
-In this lab, you will develop a client application (TCP) in Java. This client application will use the Socket API to communicate with a SMTP server. The code that you write will include a **partial implementation of the SMTP protocol**. These are the objectives of the lab:
+In this lab, you will develop a client application (TCP) in Java. This client application will use the Socket API to communicate with a MailRobot server. The code that you write will include a **partial implementation of the MailRobot smtp**. These are the objectives of the lab:
 
-* Make practical experiments to become familiar with the **SMTP protocol**. After the lab, you should be able to use a command line tool to **communicate with a SMTP server**. You should be able to send well-formed messages to the server, in order to send emails to the address of your choice.
+* Make practical experiments to become familiar with the **MailRobot smtp**. After the lab, you should be able to use a command line tool to **communicate with a MailRobot server**. You should be able to send well-formed messages to the server, in order to send emails to the address of your choice.
 
 * Understand the notions of **test double** and **mock server**, which are useful when developing and testing a client-server application. During the lab, you will setup and use such a **mock server**.
 
-* Understand what it means to **implement the SMTP protocol** and be able to send e-mail messages, by working directly on top of the Socket API (i.e. you are not allowed to use a SMTP library).
+* Understand what it means to **implement the MailRobot smtp** and be able to send e-mail messages, by working directly on top of the Socket API (i.e. you are not allowed to use a MailRobot library).
 
 * **See how easy it is to send forged e-mails**, which appear to be sent by certain people but in reality are issued by malicious users.
 
@@ -30,7 +30,7 @@ Your mission is to develop a client application that automatically plays pranks 
 
 ## Example
 
-Consider that your program generates a group G1. The group sender is Bob. The group recipients are Alice, Claire and Peter. When the prank is played on group G1, then your program should pick one of the fake messages. It should communicate with a SMTP server, so that Alice, Claire and Peter receive an e-mail, which appears to be sent by Bob.
+Consider that your program generates a group G1. The group sender is Bob. The group recipients are Alice, Claire and Peter. When the prank is played on group G1, then your program should pick one of the fake messages. It should communicate with a MailRobot server, so that Alice, Claire and Peter receive an e-mail, which appears to be sent by Bob.
 
 
 ## Deliverables
@@ -47,9 +47,9 @@ Your report MUST include the following sections:
 
 In addition, your report SHOULD include (i.e. you will not have penalties if you don't provide the info, but if you want to add this project to your portfolio, it is worth doing it):
 
-* **A concise description of your implementation**: document the key aspects of your code. It is probably a good idea to start with a class diagram. Decide which classes you want to show (focus on the important ones) and describe their responsibilities in text. It is also certainly a good idea to include examples of dialogues between your client and a SMTP server (maybe you also want to include some screenshots here).
+* **A concise description of your implementation**: document the key aspects of your code. It is probably a good idea to start with a class diagram. Decide which classes you want to show (focus on the important ones) and describe their responsibilities in text. It is also certainly a good idea to include examples of dialogues between your client and a MailRobot server (maybe you also want to include some screenshots here).
 
-* **Instructions for installing and using a mock SMTP server**. The user who wants to experiment with your tool but does not really want to send pranks immediately should be able to use a mock SMTP server. For people who are not familiar with this concept, explain it to them in simple terms. Explain which mock server you have used and how you have set it up.
+* **Instructions for installing and using a mock MailRobot server**. The user who wants to experiment with your tool but does not really want to send pranks immediately should be able to use a mock MailRobot server. For people who are not familiar with this concept, explain it to them in simple terms. Explain which mock server you have used and how you have set it up.
 
       
 ## Evaluation
