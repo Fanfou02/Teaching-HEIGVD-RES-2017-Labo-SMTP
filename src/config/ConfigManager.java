@@ -1,10 +1,9 @@
 package config;
 
-import model.mail.Mail;
 import model.mail.Person;
 
 import java.io.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -12,61 +11,60 @@ import java.util.Properties;
 /**
  * Created by pierre-samuelrochat on 06.04.17.
  */
-public class ConfigManager {
+public class ConfigManager implements IConfigManager{
+
+    // Properties
     private String smtpServerAddress;
     private int smtpServerPort;
     private int numberOfGroups;
-    private Person witnessToCC;
-    private List<Person> victims = new LinkedList<Person>();
-    private List<Mail> messages = new LinkedList<Mail>();
+    private List<Person>witnessToCC = new ArrayList<>();
+
+    // victims and messages to send
+    private List<Person> victims = new ArrayList<>();
+    private List<String> messages = new ArrayList<>();
 
     public ConfigManager(){
+        loadVictimsFromFile("config/victims.utf8");
+        loadMessagesFromFile("config/messages.utf8");
+        loadProperties("config/config.properties");
+    }
 
-        // Load properties from config.properties file
-        Properties prop = new Properties();
-        try {
-            prop.load(new FileInputStream("config/config.properties"));
-            smtpServerAddress = prop.getProperty("smtpServerAddress");
-            smtpServerPort = Integer.parseInt(prop.getProperty("smtpServerPort"));
-            numberOfGroups = Integer.parseInt(prop.getProperty("numberOfGroups"));
-            witnessToCC = new Person(prop.getProperty("witnessToCC"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // Load messages and victims to prank from respective files
+    public void loadVictimsFromFile(String filename){
         BufferedReader victimsReader = null;
+        try {
+            victimsReader = new BufferedReader(new FileReader(filename));
+            String victim;
+            while ((victim = victimsReader.readLine()) != null) {
+                victims.add(new Person(victim));
+            }
+        }catch(IOException e ){
+            e.printStackTrace();
+        }finally {
+            try {
+                victimsReader.close();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void loadMessagesFromFile(String filename){
+// Load messages and victims to prank from respective files
         BufferedReader messagesReader = null;
 
         try {
-            victimsReader = new BufferedReader(new FileReader("config/victims.utf8"));
             messagesReader = new BufferedReader(new FileReader("config/messages.utf8"));
-
-            // Load victims
-            String victim;
-            while ((victim = victimsReader.readLine()) != null){
-                victims.add(new Person(victim));
-            }
 
             // Load prank messages
             String line;
-            String subject = "";
             String message = "";
-            boolean isFirstLine = true;
 
             while ((line = messagesReader.readLine()) != null){
                 if (line.equals("==")) {
-                    messages.add(new Mail(subject, message));
-                    isFirstLine = true;
-                    subject = "";
+                    messages.add(message);
                     message = "";
                 } else {
-                    if (isFirstLine) {
-                        subject = line.substring(8);
-                        isFirstLine = false;
-                    } else {
-                        message += "\n" + line;
-                    }
+                    message += "\r\n" + line;
                 }
             }
         } catch (IOException e) {
@@ -74,12 +72,28 @@ public class ConfigManager {
         } finally {
             try {
                 messagesReader.close();
-                victimsReader.close();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
 
+    public void loadProperties(String filename){
+        Properties prop = new Properties();
+        try {
+            prop.load(new FileInputStream(filename));
+            smtpServerAddress = prop.getProperty("smtpServerAddress");
+            smtpServerPort = Integer.parseInt(prop.getProperty("smtpServerPort"));
+            numberOfGroups = Integer.parseInt(prop.getProperty("numberOfGroups"));
+            witnessToCC = new ArrayList<>();
+            String witness = prop.getProperty("witnessToCC");
+            String [] witnessAdress = witness.split(",");
+            for(String email : witnessAdress)
+                witnessToCC.add(new Person(email));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getSmtpServerAddress() {
@@ -90,11 +104,11 @@ public class ConfigManager {
         return smtpServerPort;
     }
 
-    public int getNumberOfGroups() {
+    public int getNbGroups() {
         return numberOfGroups;
     }
 
-    public Person getWitnessToCC() {
+    public List<Person> getWitnessesToCc() {
         return witnessToCC;
     }
 
@@ -102,8 +116,9 @@ public class ConfigManager {
         return victims;
     }
 
-    public List<Mail> getMessages() {
+    public List<String> getMessages() {
         return messages;
     }
+
 }
 

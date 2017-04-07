@@ -34,7 +34,9 @@ public class SmtpClient implements ISmtpClient {
         String line = reader.readLine();
         LOG.info(line);
 
-        writer.printf("EHLO localhost\n\r");
+        writer.printf("EHLO localhost");
+        writer.write("\r\n");
+        writer.flush();
 
         line = reader.readLine();
         LOG.info(line);
@@ -48,7 +50,8 @@ public class SmtpClient implements ISmtpClient {
         }
 
         writer.write("MAIL FROM:");
-        writer.write(mail.getFrom() + "\r\n");
+        writer.write(mail.getFrom());
+        writer.write("\r\n");
         writer.flush();
 
         line = reader.readLine();
@@ -64,13 +67,15 @@ public class SmtpClient implements ISmtpClient {
             addRCPT(to);
 
 
-        writer.write("DATA\r\n");
+        writer.write("DATA");
+        writer.write("\r\n");
         writer.flush();
 
         line = reader.readLine();
         LOG.info(line);
 
-        writer.write("Content-Type: text/plain; charset=\"UTF-8\"\r\n");
+        writer.write("Content-Type: text/plain; charset=\"UTF-8\"");
+        writer.write("\r\n");
         writer.write("From: " + mail.getFrom());
 
         writer.write("To: " + mail.getTo()[0]);
@@ -79,13 +84,15 @@ public class SmtpClient implements ISmtpClient {
         }
         writer.write("\r\n");
 
-        writer.write("Cc: " + mail.getCc()[0]);
-        for (int i = 1; i < mail.getCc().length; i++){
-            writer.write(", " + mail.getCc()[i]);
-        }
-        writer.write("\r\n");
+        if(mail.getCc().length > 0) {
+            writer.write("Cc: " + mail.getCc()[0]);
+            for (int i = 1; i < mail.getCc().length; i++) {
+                writer.write(", " + mail.getCc()[i]);
+            }
+            writer.write("\r\n");
 
-        writer.flush();
+            writer.flush();
+        }
 
         LOG.info(mail.getBody());
 
