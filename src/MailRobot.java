@@ -5,9 +5,6 @@ import smtp.SmtpClient;
 
 import java.io.IOException;
 
-/**
- * Created by francoisquellec on 06.04.17.
- */
 public class MailRobot {
     public static void main(String... args){
         ConfigManager configs = new ConfigManager();

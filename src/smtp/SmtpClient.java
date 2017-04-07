@@ -6,9 +6,6 @@ import java.io.*;
 import java.net.Socket;
 import java.util.logging.Logger;
 
-/**
- * Created by francoisquellec on 06.04.17.
- */
 public class SmtpClient implements ISmtpClient {
     private static final Logger LOG = Logger.getLogger(SmtpClient.class.getName());
 

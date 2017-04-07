@@ -8,9 +8,6 @@ import java.util.List;
 import java.util.Properties;
 
 
-/**
- * Created by pierre-samuelrochat on 06.04.17.
- */
 public class ConfigManager implements IConfigManager{
 
     // Properties

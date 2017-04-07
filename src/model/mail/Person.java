@@ -3,9 +3,6 @@ package model.mail;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by francoisquellec on 06.04.17.
- */
 public class Person {
     private String firstName;
     private String lastName;

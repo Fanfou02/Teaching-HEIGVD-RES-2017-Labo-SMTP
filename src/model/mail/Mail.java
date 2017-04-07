@@ -1,10 +1,5 @@
 package model.mail;
 
-import java.util.LinkedList;
-
-/**
- * Created by francoisquellec on 06.04.17.
- */
 public class Mail {
     private String from;
     private String [] to = new String[0];

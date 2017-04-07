@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by francoisquellec on 06.04.17.
- */
 public class PrankGenerator {
     private IConfigManager configManager;
     public PrankGenerator(IConfigManager configManager){

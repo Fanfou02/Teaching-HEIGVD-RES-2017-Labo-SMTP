@@ -5,11 +5,7 @@ import model.mail.Person;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-/**
- * Created by pierre-samuelrochat on 06.04.17.
- */
 public class Prank {
 
     private Person victimSender;
