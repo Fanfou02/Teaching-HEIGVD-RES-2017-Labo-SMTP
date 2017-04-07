@@ -64,7 +64,7 @@ public class ConfigManager implements IConfigManager{
                     messages.add(message);
                     message = "";
                 } else {
-                    message += "\r\n" + line;
+                    message += line + "\r\n";
                 }
             }
         } catch (IOException e) {

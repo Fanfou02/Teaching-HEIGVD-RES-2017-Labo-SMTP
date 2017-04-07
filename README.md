@@ -51,10 +51,6 @@ In addition, your report SHOULD include (i.e. you will not have penalties if you
 
 * **Instructions for installing and using a mock MailRobot server**. The user who wants to experiment with your tool but does not really want to send pranks immediately should be able to use a mock MailRobot server. For people who are not familiar with this concept, explain it to them in simple terms. Explain which mock server you have used and how you have set it up.
 
-      
-## Evaluation
-
-* See CyberLearn.
 
 
 

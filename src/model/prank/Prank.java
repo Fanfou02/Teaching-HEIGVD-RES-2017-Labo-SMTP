@@ -53,15 +53,33 @@ public class Prank {
         Mail mail = new Mail();
         mail.setBody(this.message + "\r\n" + victimSender.getFirstName());
 
-        String [] to = victimRecipients.stream().map(person -> person.getEmail())
-                                                .collect(Collectors.toList()).toArray(new String[]{});
+        String [] to = new String[victimRecipients.size()];
+        for (int i = 0; i < victimRecipients.size(); i++) {
+            to[i] = victimRecipients.get(i).getEmail();
+            System.out.println("to :" +  to[i]);
+        }
         mail.setTo(to);
 
-        String [] cc = witnessRecipients.stream().map(person -> person.getEmail())
-                .collect(Collectors.toList()).toArray(new String[]{});
-        mail.setTo(cc);
+        String [] cc = new String[witnessRecipients.size()];
+        for (int i = 0; i < witnessRecipients.size(); i++) {
+            cc[i] = witnessRecipients.get(i).getEmail();
+            System.out.println("cc :" +  cc[i]);
+        }
+        mail.setCc(cc);
 
         mail.setFrom(victimSender.getEmail());
+
+        System.out.println("nbTo : " + mail.getTo().length);
+
+        System.out.println("genrate Mail : ");
+        System.out.println("From : " + mail.getFrom());
+        System.out.print("To : ");
+        for(String p : mail.getTo())
+            System.out.print(p);
+        System.out.print("\nCc : ");
+        for(String p : mail.getCc())
+            System.out.print(p);
+        System.out.println("\nBody: " + mail.getBody());
 
         return mail;
     }

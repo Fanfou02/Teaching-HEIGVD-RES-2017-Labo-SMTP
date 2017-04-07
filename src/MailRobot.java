@@ -12,7 +12,6 @@ public class MailRobot {
     public static void main(String... args){
         ConfigManager configs = new ConfigManager();
         PrankGenerator pg = new PrankGenerator(configs);
-
         SmtpClient smtpClient = new SmtpClient(configs.getSmtpServerAddress(), configs.getSmtpServerPort());
 
         try {

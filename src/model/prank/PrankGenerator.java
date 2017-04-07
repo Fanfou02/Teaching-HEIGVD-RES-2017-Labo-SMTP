@@ -31,6 +31,7 @@ public class PrankGenerator {
         for(Group group : groups){
             Prank prank = new Prank();
             List<Person> victims = group.getMembers();
+
             Collections.shuffle(victims);
             Person sender = victims.remove(0);
             prank.setVictimSender(sender);

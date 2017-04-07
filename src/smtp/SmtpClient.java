@@ -63,10 +63,6 @@ public class SmtpClient implements ISmtpClient {
         for (String to : mail.getCc())
             addRCPT(to);
 
-        for (String to : mail.getBcc())
-            addRCPT(to);
-
-
         writer.write("DATA");
         writer.write("\r\n");
         writer.flush();
@@ -75,8 +71,10 @@ public class SmtpClient implements ISmtpClient {
         LOG.info(line);
 
         writer.write("Content-Type: text/plain; charset=\"UTF-8\"");
+
         writer.write("\r\n");
         writer.write("From: " + mail.getFrom());
+        writer.write("\r\n");
 
         writer.write("To: " + mail.getTo()[0]);
         for (int i = 1; i < mail.getTo().length; i++){
@@ -84,6 +82,7 @@ public class SmtpClient implements ISmtpClient {
         }
         writer.write("\r\n");
 
+        System.out.println("cc : " + mail.getCc().length);
         if(mail.getCc().length > 0) {
             writer.write("Cc: " + mail.getCc()[0]);
             for (int i = 1; i < mail.getCc().length; i++) {
